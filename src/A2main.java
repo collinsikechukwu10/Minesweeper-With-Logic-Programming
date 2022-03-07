@@ -4,35 +4,39 @@ import core.Agent;
 import core.Game;
 import core.KnowledgeBase;
 import core.World;
-import strategy.BasicStrategy;
-import strategy.SinglePointStrategy;
-import strategy.SatisfiabilityTestReasoningStrategy;
-import strategy.SweeperStrategy;
+import eval.GameEvaluator;
+import strategy.*;
 
 public class A2main {
 
     public static void main(String[] args) {
 
-        boolean verbose = false;
-        if (args.length > 2 && args[2].equals("verbose")) {
-            verbose = true; //prints agent's view at each step if true
+        boolean verbose = args.length > 2 && args[2].equals("verbose");
+        boolean eval = args[0].equals("eval");
+
+        if (eval) {
+            GameEvaluator evaluator = new GameEvaluator();
+            evaluator.evaluate();
+        } else {
+            System.out.println("-------------------------------------------\n");
+            System.out.println("Agent " + args[0] + " plays " + args[1] + "\n");
+            SweeperStrategy strategy = resolveStrategy(args[0]);
+            World world = World.valueOf(args[1]);
+            test(world, strategy, verbose);
         }
 
-        System.out.println("-------------------------------------------\n");
-        System.out.println("Agent " + args[0] + " plays " + args[1] + "\n");
 
+    }
 
-        World world = World.valueOf(args[1]);
-
+    private static void test(World world, SweeperStrategy strategy, boolean verbose) {
         char[][] board = world.getMap();
         printBoard(board);
         System.out.println("Start!");
 
         Game game = new Game(board);
 
-        KnowledgeBase knowledgeBase = new KnowledgeBase(game.getGameBoardHeight(),game.getGameBoardWidth());
+        KnowledgeBase knowledgeBase = new KnowledgeBase(game.getGameBoardHeight(), game.getGameBoardWidth());
 
-        SweeperStrategy strategy = resolveStrategy(args[0]);
         strategy.setKnowledgeBase(knowledgeBase);
 
 
@@ -41,7 +45,6 @@ public class A2main {
         agent.setStrategy(strategy);
         agent.setGame(game);
         agent.traverse();
-
     }
 
     private static SweeperStrategy resolveStrategy(String strategyString) {
@@ -58,12 +61,12 @@ public class A2main {
                 break;
             case "P3":
                 //TODO: Part 3
-                strategy = new SatisfiabilityTestReasoningStrategy();
+                strategy = new DnfSatisfiabilityTestReasoningStrategy();
                 break;
-//            case "P4":
+            case "P4":
 //                //TODO: Part 4
-//                strategy = new BasicStrategy();
-//                break;
+                strategy = new CnfSatisfiabilityTestReasoningStrategy();
+                break;
 //            case "P5":
 //                //TODO: Part 5
 //                strategy = new BasicStrategy();

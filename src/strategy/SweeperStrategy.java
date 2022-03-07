@@ -18,7 +18,6 @@ public abstract class SweeperStrategy {
 
     public abstract List<Cell> getNextProbe();
 
-
     public boolean isShouldProbeCell() {
         return shouldProbeCell;
     }
@@ -26,4 +25,9 @@ public abstract class SweeperStrategy {
     public void setShouldProbeCell(boolean shouldProbeCell) {
         this.shouldProbeCell = shouldProbeCell;
     }
+
+    public abstract void clean();
+
+    public abstract List<Cell> getInitMove();
+
 }

@@ -1,4 +1,6 @@
 #!/bin/bash
 
 
-javac *.java
+./playSweeper.sh P1 TEST1
+
+#javac *.java

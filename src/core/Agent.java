@@ -2,7 +2,10 @@ package core;
 
 import strategy.SweeperStrategy;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 
 public class Agent {
 
@@ -10,6 +13,7 @@ public class Agent {
     private final boolean verbose;
     private SweeperStrategy strategy;
     private Game game;
+    private boolean madeInitMove = false;
 
     public Agent(boolean verbose) {
         this.verbose = verbose;
@@ -28,108 +32,93 @@ public class Agent {
         return game;
     }
 
-    public void traverse() {
-        //init move
-        initialMove();
-        while (!game.isGameOver()) {
-
-            // check if the remaining hidden cells are mines. if so, flag alll of them
-            if (allRemainingHiddenCellsAreMines()) {
-                knowledgeBase.getHiddenCells().forEach(this::flagCell);
-            }
-
-            if (noHiddenCellsAndCorrectFlaggedMines()) {
-                // player has probes all the hidden cells and has the correct number of mines . so win game
-                winGame();
-                break;
-            }
-
-            // do probing
-            List<Cell> cells = strategy.getNextProbe();
-            if (cells.size() != 0) {
-                if (strategy.isShouldProbeCell()) {
-                    cells.forEach(this::probe);
-                } else {
-                    cells.forEach(this::flagCell);
-                }
-            } else {
-                // no more logical moves
-                gameOverDueToNoLogicalMoves();
-                break;
-            }
-
+    private void initialize() {
+        // first thing is to add all the blocked cells to the knowledge base
+        game.getBlockedCells().forEach(this::uncoverCell);
+        if (verbose) {
+            logKnowledgeBaseView();
         }
     }
 
-    public boolean allRemainingHiddenCellsAreMines() {
-        return knowledgeBase.getHiddenCells().size() == game.getNumberOfMines() - knowledgeBase.getFlaggedCells().size();
+    public void traverse() {
+        initialize();
+        while (true) {
+            // do probing
+            List<Cell> cellsToProbe = getNextProbe();
+
+            if (!cellsToProbe.isEmpty()) {
+                cellsToProbe.forEach(cell -> {
+                    if (game.initialCellsToProbe().contains(cell) || strategy.isShouldProbeCell()) {
+                        probe(cell);
+                    } else {
+                        flagCell(cell);
+                    }
+                });
+            } else {
+                // no more logical moves
+                game.gameOverDueToNoLogicalMoves();
+                break;
+            }
+
+            // this condition is only condusive for P1, updarte it
+            if (!game.isStillPlaying(knowledgeBase)) {
+                break;
+            } else {
+                if (verbose) {
+                    logKnowledgeBaseView();
+                }
+            }
+        }
+        endGame();
     }
 
-    public boolean noHiddenCellsAndCorrectFlaggedMines() {
-        return knowledgeBase.getHiddenCells().size() == 0 && knowledgeBase.getFlaggedCells().size() == game.getNumberOfMines();
-    }
-
-
-    public void initialMove() {
-        // first thing is to add all the blocked cells to the knowledge base
-        game.getBlockedCells().forEach(this::uncoverCell);
-        // you can probe the top left cell and the middle cell
-        probe(new Cell(0, 0));
-        char[][] kbView = knowledgeBase.getMapView();
-        int lengthMidPoint = (kbView.length / 2) + 1; // since java floors int division;
-        int widthMidPoint = (kbView[0].length / 2) + 1; // since java floors int division;
-        probe(new Cell(lengthMidPoint, widthMidPoint));
-        probe(new Cell(lengthMidPoint, widthMidPoint));
-    }
 
     private void probe(Cell cell) {
         if (knowledgeBase.getUncoveredCells().contains(cell)) {
             return;
         }
-        // probe the cell from the original mpa
         BoardCellType type = getGame().probe(cell);
-
         if (type == BoardCellType.MINE) {
-            gameOverByFoundMine();
-            return;
-        }
-        // update knowledge base
-        uncoverCell(cell);
-
-        // Uncover all neighbours if current cell clue is zero.
-        if (type == BoardCellType.MINE_NEIGBOUR_0) {
-            knowledgeBase.getHiddenNeighbours(cell).forEach(this::uncoverCell);
-        }
-        // Log board if verbose is true
-        if (verbose) {
-            printBoard(knowledgeBase.getMapView());
+            knowledgeBase.uncoverCell(cell, '-');
+        } else {
+            uncoverCell(cell);
         }
 
+
+    }
+
+    private List<Cell> getNextProbe() {
+        if (madeInitMove) {
+            return strategy.getNextProbe();
+        } else {
+            madeInitMove = true;
+            return strategy.getInitMove();
+        }
     }
 
     private void flagCell(Cell cell) {
         knowledgeBase.flagCell(cell);
+        // Log board if verbose is true
+        if (verbose) {
+            logKnowledgeBaseView();
+        }
     }
 
     private void uncoverCell(Cell cell) {
-        // uncover cell from game and set to agent view
-        // this is safe probing. i.e only used in situations where probing a mine is impossible
-        knowledgeBase.uncoverCell(cell, getGame().probe(cell).getCharValue());
+        BoardCellType type = getGame().probe(cell);
+        knowledgeBase.uncoverCell(cell, type.getCharValue());
+        // Uncover all neighbours if current cell clue is zero.
+        if (type == BoardCellType.MINE_NEIGBOUR_0) {
+            knowledgeBase.getHiddenNeighbours(cell).forEach(this::uncoverCell);
+        }
+
     }
 
-    private void gameOverDueToNoLogicalMoves() {
-        printBoard(knowledgeBase.getMapView());
-        game.gameOverDueToNoLogicalMoves();
-    }
 
-    private void gameOverByFoundMine() {
-        printBoard(knowledgeBase.getMapView());
-        game.gameOverByFoundMine();
-    }
-
-    private void winGame() {
-        printBoard(knowledgeBase.getMapView());
-        game.winGame();
+    private void endGame() {
+        System.out.println("Final map");
+        logKnowledgeBaseView();
+        game.endGame();
     }
 
 
@@ -156,6 +145,10 @@ public class Agent {
             System.out.println();
         }
         System.out.println();
+    }
+
+    private void logKnowledgeBaseView() {
+        printBoard(knowledgeBase.getMapView());
     }
 
     public void setStrategy(SweeperStrategy strategy) {

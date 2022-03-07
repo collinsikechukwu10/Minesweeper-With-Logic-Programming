@@ -20,6 +20,36 @@ public class Game {
 
     }
 
+    public GameStatus getStatus() {
+        return status;
+    }
+
+    public List<Cell> initialCellsToProbe() {
+        List<Cell> initCells = new ArrayList<>();
+        initCells.add(new Cell(0, 0));
+        initCells.add(new Cell((getGameBoardHeight() - 1) / 2, (getGameBoardWidth() - 1) / 2));
+        return initCells;
+    }
+
+    public boolean hasWon(KnowledgeBase kb) {
+        // this condition is only condusive for P1, updarte it
+        // for p1, this works
+        boolean isWon = (gameBoardWidth * gameBoardHeight) - (kb.getUncoveredCells().size() + countMines()) == 0;
+        // however for p2, only should just make sure that the number of hidden cells list is empty.
+        // the game would not stall tho as there is a condition in agent that breaks out of the loop if a strategy
+        // cannot provide a cell to probe
+//        boolean isWon = kb.getHiddenCells().size() == 0;
+        if (isWon && status != GameStatus.FOUND_MINE) {
+            status = GameStatus.WON;
+        }
+        return isWon;
+    }
+
+    public boolean isStillPlaying(KnowledgeBase kb) {
+
+        return !hasWon(kb) && status == GameStatus.RUNNING;
+    }
+
     private int countMines() {
         int count = 0;
         for (char[] rows : map) {
@@ -45,23 +75,16 @@ public class Game {
         return numberOfMines;
     }
 
-    public boolean isGameOver() {
-        return status != GameStatus.RUNNING;
-    }
-
     public void gameOverDueToNoLogicalMoves() {
         status = GameStatus.NO_LOGICAL_MOVES;
+    }
+
+    public void endGame() {
         printResult();
     }
 
-    public void winGame() {
-        status = GameStatus.WON;
-        printResult();
-    }
-
-    public void gameOverByFoundMine() {
-        status = GameStatus.FOUND_MINE;
-        printResult();
+    public void printResult() {
+        System.out.println(status.getMessage());
     }
 
     public List<Cell> getBlockedCells() {
@@ -77,9 +100,6 @@ public class Game {
         return cells;
     }
 
-    public void printResult() {
-        System.out.println(status.getMessage());
-    }
 
     public int getGameBoardWidth() {
         return gameBoardWidth;

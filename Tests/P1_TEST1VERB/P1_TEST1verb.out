@@ -17,6 +17,7 @@ Start!
  1| b ? b 
  2| ? ? ? 
 
+Final map
 
     0 1 2 
     - - - 
@@ -24,14 +25,6 @@ Start!
  1| b 3 b 
  2| ? ? ? 
 
-Final map
 
-    0 1 2 
-    - - - 
- 0| 0 b b 
- 1| b 3 b 
- 2| - ? ? 
-
-
-Result: Agent dead: found mine
+Result: Agent alive: all solved
 

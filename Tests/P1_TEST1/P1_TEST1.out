@@ -16,8 +16,8 @@ Final map
     - - - 
  0| 0 b b 
  1| b 3 b 
- 2| - ? ? 
+ 2| ? ? ? 
 
 
-Result: Agent dead: found mine
+Result: Agent alive: all solved
 
