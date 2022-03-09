@@ -27,9 +27,8 @@ public class Cell {
         return "Cell{" + r + "," + c + '}';
     }
 
-    public boolean isAdjacent(Cell other) {
-
-        return Math.max(Math.abs(getR() - other.getR()), Math.abs(getC() - other.getC())) == 1;
+    public boolean isNonDiagonalNeighbour(Cell other) {
+        return Math.abs(getR() - other.getR()) == 0 || Math.abs(getC() - other.getC()) == 0;
     }
 
     @Override

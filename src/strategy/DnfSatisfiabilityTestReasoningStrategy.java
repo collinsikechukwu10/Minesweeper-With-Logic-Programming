@@ -26,7 +26,7 @@ public class DnfSatisfiabilityTestReasoningStrategy extends SinglePointStrategy 
                 return List.of(cell);
             }
         }
-        // dnf could not resolve any cell. maybe try sps
+        // dnf could not resolve any cell. fallback try sps
         return super.getNextProbe();
     }
 
@@ -38,19 +38,16 @@ public class DnfSatisfiabilityTestReasoningStrategy extends SinglePointStrategy 
         List<String> uncoveredCellKBU = new ArrayList<>();
         // add all uncovered cells as well as their hidden neighbour information
         knowledgeBase.getUncoveredCells().forEach(cell -> {
-            // since the cell is discovered, we can add as not a mine
-            sentences.add(LogicUtils.not(LogicUtils.toLiteral(cell)));
-            // blocks are not included in the uncovered cells
             BoardCellType type = knowledgeBase.getKnowledgeBaseCellTypeAt(cell);
-            // check if a cell is a block or if all its neighbours have been discovered
-//            if (type == BoardCellType.BLOCK) sentences.add(LogicUtils.toLiteral(cell));
+            // check if a cell is not a block or if all its neighbours have not been discovered
             if (type != BoardCellType.BLOCK && knowledgeBase.getHiddenNeighbours(cell).size() > 0) {
+
                 int clue = type.getIntValue();
                 // take out the number of flags that we have already found from the clue
                 clue  = clue - knowledgeBase.getFlaggedNeighbours(cell).size();
 
                 List<Cell> currentCellNeighbours = knowledgeBase.getHiddenNeighbours(cell);
-                // use clue and neighbour size to all combinations where only clue numer of mines exist within the neighbours
+                // use clue and neighbour size to all combinations where only clue number of mines exist within the neighbours
                 // combinator returns a list of all combinations of ids of neighbours that coule be a mine
                 List<int[]> combinations = LogicUtils.combinator(currentCellNeighbours.size(), clue);
                 List<String> clauses = new ArrayList<>();
@@ -78,12 +75,11 @@ public class DnfSatisfiabilityTestReasoningStrategy extends SinglePointStrategy 
 
 
 
-    private Cell solve(Cell cell) {
-
+    public Cell solve(Cell cell) {
         // get current cell
         Set<String> kbu = fillKBU();
         // add current cell, to check if the cell is a mine
-        kbu.add(LogicUtils.not(LogicUtils.toLiteral(cell)));
+        kbu.add(LogicUtils.toLiteral(cell));
         FormulaFactory f = new FormulaFactory();
         PropositionalParser p = new PropositionalParser(f);
         SATSolver miniSat = MiniSat.miniSat(f);
@@ -98,11 +94,11 @@ public class DnfSatisfiabilityTestReasoningStrategy extends SinglePointStrategy 
 
         // get satisfiability
         Tristate result = miniSat.sat();
-        if (result == Tristate.UNDEF) {
-            return null;
+        if (result != Tristate.TRUE) {
+            setShouldProbeCell(true);
+            return cell;
         }
-        setShouldProbeCell(result == Tristate.TRUE);
-        return cell;
+        return null;
     }
 
 }

@@ -1,0 +1,287 @@
+TEST1,3 by 3,BasicStrategy,Result: Agent alive: all solved
+
+TEST1,3 by 3,CnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+TEST1,3 by 3,SinglePointStrategy,Result: Agent alive: all solved
+
+TEST1,3 by 3,DnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+TEST2,3 by 3,BasicStrategy,Result: Agent dead: found mine
+
+TEST2,3 by 3,CnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+TEST2,3 by 3,SinglePointStrategy,Result: Agent alive: all solved
+
+TEST2,3 by 3,DnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+TEST3,3 by 3,BasicStrategy,Result: Agent dead: found mine
+
+TEST3,3 by 3,CnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+TEST3,3 by 3,SinglePointStrategy,Result: Agent not terminated
+
+TEST3,3 by 3,DnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+TEST4,3 by 3,BasicStrategy,Result: Agent dead: found mine
+
+TEST4,3 by 3,CnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+TEST4,3 by 3,SinglePointStrategy,Result: Agent not terminated
+
+TEST4,3 by 3,DnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+TEST5,3 by 3,BasicStrategy,Result: Agent dead: found mine
+
+TEST5,3 by 3,CnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+TEST5,3 by 3,SinglePointStrategy,Result: Agent not terminated
+
+TEST5,3 by 3,DnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+TEST6,3 by 3,BasicStrategy,Result: Agent alive: all solved
+
+TEST6,3 by 3,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+TEST6,3 by 3,SinglePointStrategy,Result: Agent not terminated
+
+TEST6,3 by 3,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+SMALL1,5 by 5,BasicStrategy,Result: Agent dead: found mine
+
+SMALL1,5 by 5,CnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+SMALL1,5 by 5,SinglePointStrategy,Result: Agent not terminated
+
+SMALL1,5 by 5,DnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+SMALL2,5 by 5,BasicStrategy,Result: Agent dead: found mine
+
+SMALL2,5 by 5,CnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+SMALL2,5 by 5,SinglePointStrategy,Result: Agent alive: all solved
+
+SMALL2,5 by 5,DnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+SMALL3,5 by 5,BasicStrategy,Result: Agent dead: found mine
+
+SMALL3,5 by 5,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+SMALL3,5 by 5,SinglePointStrategy,Result: Agent not terminated
+
+SMALL3,5 by 5,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+SMALL4,5 by 5,BasicStrategy,Result: Agent dead: found mine
+
+SMALL4,5 by 5,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+SMALL4,5 by 5,SinglePointStrategy,Result: Agent not terminated
+
+SMALL4,5 by 5,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+SMALL5,5 by 5,BasicStrategy,Result: Agent dead: found mine
+
+SMALL5,5 by 5,CnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+SMALL5,5 by 5,SinglePointStrategy,Result: Agent not terminated
+
+SMALL5,5 by 5,DnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+SMALL6,5 by 5,BasicStrategy,Result: Agent dead: found mine
+
+SMALL6,5 by 5,CnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+SMALL6,5 by 5,SinglePointStrategy,Result: Agent alive: all solved
+
+SMALL6,5 by 5,DnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+SMALL7,5 by 5,BasicStrategy,Result: Agent dead: found mine
+
+SMALL7,5 by 5,CnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+SMALL7,5 by 5,SinglePointStrategy,Result: Agent alive: all solved
+
+SMALL7,5 by 5,DnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+SMALL8,5 by 5,BasicStrategy,Result: Agent dead: found mine
+
+SMALL8,5 by 5,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+SMALL8,5 by 5,SinglePointStrategy,Result: Agent not terminated
+
+SMALL8,5 by 5,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+SMALL9,5 by 5,BasicStrategy,Result: Agent dead: found mine
+
+SMALL9,5 by 5,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+SMALL9,5 by 5,SinglePointStrategy,Result: Agent not terminated
+
+SMALL9,5 by 5,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+SMALL10,5 by 5,BasicStrategy,Result: Agent dead: found mine
+
+SMALL10,5 by 5,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+SMALL10,5 by 5,SinglePointStrategy,Result: Agent not terminated
+
+SMALL10,5 by 5,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+MEDIUM1,7 by 7,BasicStrategy,Result: Agent dead: found mine
+
+MEDIUM1,7 by 7,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+MEDIUM1,7 by 7,SinglePointStrategy,Result: Agent not terminated
+
+MEDIUM1,7 by 7,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+MEDIUM2,7 by 7,BasicStrategy,Result: Agent dead: found mine
+
+MEDIUM2,7 by 7,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+MEDIUM2,7 by 7,SinglePointStrategy,Result: Agent not terminated
+
+MEDIUM2,7 by 7,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+MEDIUM3,7 by 7,BasicStrategy,Result: Agent dead: found mine
+
+MEDIUM3,7 by 7,CnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+MEDIUM3,7 by 7,SinglePointStrategy,Result: Agent not terminated
+
+MEDIUM3,7 by 7,DnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+MEDIUM4,7 by 7,BasicStrategy,Result: Agent dead: found mine
+
+MEDIUM4,7 by 7,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+MEDIUM4,7 by 7,SinglePointStrategy,Result: Agent not terminated
+
+MEDIUM4,7 by 7,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+MEDIUM5,7 by 7,BasicStrategy,Result: Agent dead: found mine
+
+MEDIUM5,7 by 7,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+MEDIUM5,7 by 7,SinglePointStrategy,Result: Agent not terminated
+
+MEDIUM5,7 by 7,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+MEDIUM6,7 by 7,BasicStrategy,Result: Agent dead: found mine
+
+MEDIUM6,7 by 7,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+MEDIUM6,7 by 7,SinglePointStrategy,Result: Agent not terminated
+
+MEDIUM6,7 by 7,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+MEDIUM7,7 by 7,BasicStrategy,Result: Agent dead: found mine
+
+MEDIUM7,7 by 7,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+MEDIUM7,7 by 7,SinglePointStrategy,Result: Agent not terminated
+
+MEDIUM7,7 by 7,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+MEDIUM8,7 by 7,BasicStrategy,Result: Agent dead: found mine
+
+MEDIUM8,7 by 7,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+MEDIUM8,7 by 7,SinglePointStrategy,Result: Agent not terminated
+
+MEDIUM8,7 by 7,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+MEDIUM9,7 by 7,BasicStrategy,Result: Agent dead: found mine
+
+MEDIUM9,7 by 7,CnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+MEDIUM9,7 by 7,SinglePointStrategy,Result: Agent alive: all solved
+
+MEDIUM9,7 by 7,DnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+MEDIUM10,7 by 7,BasicStrategy,Result: Agent dead: found mine
+
+MEDIUM10,7 by 7,CnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+MEDIUM10,7 by 7,SinglePointStrategy,Result: Agent not terminated
+
+MEDIUM10,7 by 7,DnfSatisfiabilityTestReasoningStrategy,Result: Agent alive: all solved
+
+LARGE1,9 by 9,BasicStrategy,Result: Agent dead: found mine
+
+LARGE1,9 by 9,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+LARGE1,9 by 9,SinglePointStrategy,Result: Agent not terminated
+
+LARGE1,9 by 9,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+LARGE2,9 by 9,BasicStrategy,Result: Agent dead: found mine
+
+LARGE2,9 by 9,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+LARGE2,9 by 9,SinglePointStrategy,Result: Agent not terminated
+
+LARGE2,9 by 9,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+LARGE3,9 by 9,BasicStrategy,Result: Agent dead: found mine
+
+LARGE3,9 by 9,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+LARGE3,9 by 9,SinglePointStrategy,Result: Agent not terminated
+
+LARGE3,9 by 9,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+LARGE4,9 by 9,BasicStrategy,Result: Agent dead: found mine
+
+LARGE4,9 by 9,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+LARGE4,9 by 9,SinglePointStrategy,Result: Agent not terminated
+
+LARGE4,9 by 9,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+LARGE5,9 by 9,BasicStrategy,Result: Agent dead: found mine
+
+LARGE5,9 by 9,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+LARGE5,9 by 9,SinglePointStrategy,Result: Agent not terminated
+
+LARGE5,9 by 9,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+LARGE6,9 by 9,BasicStrategy,Result: Agent dead: found mine
+
+LARGE6,9 by 9,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+LARGE6,9 by 9,SinglePointStrategy,Result: Agent not terminated
+
+LARGE6,9 by 9,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+LARGE7,9 by 9,BasicStrategy,Result: Agent dead: found mine
+
+LARGE7,9 by 9,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+LARGE7,9 by 9,SinglePointStrategy,Result: Agent not terminated
+
+LARGE7,9 by 9,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+LARGE8,9 by 9,BasicStrategy,Result: Agent dead: found mine
+
+LARGE8,9 by 9,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+LARGE8,9 by 9,SinglePointStrategy,Result: Agent not terminated
+
+LARGE8,9 by 9,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+LARGE9,9 by 9,BasicStrategy,Result: Agent dead: found mine
+
+LARGE9,9 by 9,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+LARGE9,9 by 9,SinglePointStrategy,Result: Agent not terminated
+
+LARGE9,9 by 9,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+LARGE10,9 by 9,BasicStrategy,Result: Agent dead: found mine
+
+LARGE10,9 by 9,CnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated
+
+LARGE10,9 by 9,SinglePointStrategy,Result: Agent not terminated
+
+LARGE10,9 by 9,DnfSatisfiabilityTestReasoningStrategy,Result: Agent not terminated

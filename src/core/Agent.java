@@ -61,7 +61,7 @@ public class Agent {
             }
 
             // this condition is only condusive for P1, updarte it
-            if (!game.isStillPlaying(knowledgeBase)) {
+            if (!game.isStillPlaying(strategy)) {
                 break;
             } else {
                 if (verbose) {

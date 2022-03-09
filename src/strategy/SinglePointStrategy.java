@@ -2,14 +2,11 @@ package strategy;
 
 import core.Cell;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-public class SinglePointStrategy extends BasicStrategy {
+public class SinglePointStrategy extends SweeperStrategy{
     @Override
     public List<Cell> getNextProbe() {
-        List<Cell> cellsToCheck = new ArrayList<>();
         // TODO, sort out how the first cell  (0,0) gets started,
         //  may do that from the traverse function in the agent class
 
@@ -19,10 +16,10 @@ public class SinglePointStrategy extends BasicStrategy {
                 if (knowledgeBase.getHiddenNeighbours(uncoveredNeighbour).size() > 0) {
                     if (allFreeNeighbours(uncoveredNeighbour)) {
                         setShouldProbeCell(true);
-                        return knowledgeBase.getHiddenNeighbours(uncoveredNeighbour);
+                        return List.of(hiddenCell);
                     } else if (allMarkedNeighbours(uncoveredNeighbour)) {
                         setShouldProbeCell(false);
-                        return knowledgeBase.getHiddenNeighbours(uncoveredNeighbour);
+                        return List.of(hiddenCell);
                     }
                 }
             }
@@ -43,7 +40,7 @@ public class SinglePointStrategy extends BasicStrategy {
 //                }
 //            }
 //        }
-        return cellsToCheck;
+        return List.of();
     }
 
     public boolean allFreeNeighbours(Cell cell) {

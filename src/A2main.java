@@ -1,5 +1,3 @@
-
-
 import core.Agent;
 import core.Game;
 import core.KnowledgeBase;
@@ -24,26 +22,22 @@ public class A2main {
             World world = World.valueOf(args[1]);
             test(world, strategy, verbose);
         }
-
-
     }
 
     private static void test(World world, SweeperStrategy strategy, boolean verbose) {
         char[][] board = world.getMap();
-        printBoard(board);
-        System.out.println("Start!");
 
         Game game = new Game(board);
-
         KnowledgeBase knowledgeBase = new KnowledgeBase(game.getGameBoardHeight(), game.getGameBoardWidth());
-
         strategy.setKnowledgeBase(knowledgeBase);
-
-
         Agent agent = new Agent(verbose);
         agent.setKnowledgeBase(knowledgeBase);
         agent.setStrategy(strategy);
         agent.setGame(game);
+
+
+        printBoard(board);
+        System.out.println("Start!");
         agent.traverse();
     }
 

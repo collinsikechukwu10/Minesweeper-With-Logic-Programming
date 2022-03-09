@@ -1,5 +1,8 @@
 package core;
 
+import strategy.BasicStrategy;
+import strategy.SweeperStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,23 +34,27 @@ public class Game {
         return initCells;
     }
 
-    public boolean hasWon(KnowledgeBase kb) {
-        // this condition is only condusive for P1, updarte it
-        // for p1, this works
-        boolean isWon = (gameBoardWidth * gameBoardHeight) - (kb.getUncoveredCells().size() + countMines()) == 0;
-        // however for p2, only should just make sure that the number of hidden cells list is empty.
-        // the game would not stall tho as there is a condition in agent that breaks out of the loop if a strategy
-        // cannot provide a cell to probe
-//        boolean isWon = kb.getHiddenCells().size() == 0;
+    public boolean hasWon(SweeperStrategy strategy) {
+        boolean isWon;
+        if (strategy instanceof BasicStrategy) {
+            // for p1, this works
+            isWon = (gameBoardWidth * gameBoardHeight) - (strategy.getKnowledgeBase().getUncoveredCells().size() + countMines()) == 0;
+
+        } else {
+            // however for p2, only should just make sure that the number of hidden cells list is empty.
+            // the game would not stall tho as there is a condition in agent that breaks out of the loop if a strategy
+            // cannot provide a cell to probe
+            isWon = strategy.getKnowledgeBase().getHiddenCells().size() == 0;
+        }
         if (isWon && status != GameStatus.FOUND_MINE) {
             status = GameStatus.WON;
         }
         return isWon;
     }
 
-    public boolean isStillPlaying(KnowledgeBase kb) {
+    public boolean isStillPlaying(SweeperStrategy strategy) {
 
-        return !hasWon(kb) && status == GameStatus.RUNNING;
+        return !hasWon(strategy) && status == GameStatus.RUNNING;
     }
 
     private int countMines() {
@@ -71,9 +78,6 @@ public class Game {
         return cellType;
     }
 
-    public int getNumberOfMines() {
-        return numberOfMines;
-    }
 
     public void gameOverDueToNoLogicalMoves() {
         status = GameStatus.NO_LOGICAL_MOVES;
@@ -84,7 +88,7 @@ public class Game {
     }
 
     public void printResult() {
-        System.out.println(status.getMessage());
+        System.out.println("\n" + status.getMessage());
     }
 
     public List<Cell> getBlockedCells() {

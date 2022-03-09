@@ -16,6 +16,10 @@ public abstract class SweeperStrategy {
         this.knowledgeBase = knowledgeBase;
     }
 
+    public KnowledgeBase getKnowledgeBase() {
+        return knowledgeBase;
+    }
+
     public abstract List<Cell> getNextProbe();
 
     public boolean isShouldProbeCell() {

@@ -13,18 +13,16 @@ public class LogicUtils {
         return "M_" + cell.getR() + "_" + cell.getC();
     }
 
-    public static String or(String a, String b) {
-        return a + DISJUNCTION_SYMBOL + b;
+    public static Cell toCell(String literal) {
+        String[] coords = literal.replace("M_", "").split("_");
+        return new Cell(Integer.parseInt(coords[0]), Integer.parseInt(coords[1]));
     }
+
 
     public static String orAll(List<String> clauses) {
         return group(clauses.stream().collect(Collectors.joining(DISJUNCTION_SYMBOL)));
     }
 
-    public static String and(String a, String b) {
-        return a + CONJUNCTION_SYMBOL + b;
-
-    }
 
     public static String andAll(List<String> clauses) {
         // RETURN AS A GROUP
@@ -34,15 +32,17 @@ public class LogicUtils {
     public static String not(String a) {
         return NEGATION_SYMBOL + a;
     }
+
     public static int not(int a) {
         return -a;
     }
+
     public static String group(String a) {
         return "(" + a + ")";
     }
 
     public static List<int[]> combinator(int n, int r) {
-        if (r == 0){
+        if (r == 0) {
             return List.of(new int[]{});
         }
         List<int[]> combinations = new ArrayList<>();
@@ -70,7 +70,4 @@ public class LogicUtils {
         return combinations;
     }
 
-    private float factorial(int num) {
-        return num * ((num > 1) ? factorial(num - 1) : 1);
-    }
 }
