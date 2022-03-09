@@ -22,7 +22,7 @@ public class CommonArrangementStrategy extends SinglePointStrategy {
             List<Cell> probeCells = oneTwoStrategy(uncoveredCell);
             if (!probeCells.isEmpty()) {
                 setShouldProbeCell(false);
-                System.out.println("Found One-Two Pattern, flagging: " + probeCells + knowledgeBase.getMapWidth());
+//                System.out.println("Found One-Two Pattern, flagging: " + probeCells + knowledgeBase.getMapWidth());
                 return probeCells;
             }
         }
@@ -68,27 +68,17 @@ public class CommonArrangementStrategy extends SinglePointStrategy {
         int cDiff = (twoCell.getC() - oneCell.getC());
         int rDiff = (twoCell.getR() - oneCell.getR());
         if (cDiff == 0) {
-            if (!knowledgeBase.getHiddenCells().contains(new Cell(oneCell.getR(), oneCell.getC() - 1)) &&
-                    !knowledgeBase.getHiddenCells().contains(new Cell(oneCell.getR(), oneCell.getC() + 1)) &&
-                    !knowledgeBase.getHiddenCells().contains(new Cell(twoCell.getR(), twoCell.getC() - 1)) &&
-                    !knowledgeBase.getHiddenCells().contains(new Cell(twoCell.getR(), twoCell.getC() - 1))) {
+
                 // that means the are on the same column, we vary cDiff, and move row by twice rDiff
                 cellsToFlag.add(new Cell(oneCell.getR() + (2 * rDiff), oneCell.getC() - 1));
                 cellsToFlag.add(new Cell(oneCell.getR() + (2 * rDiff), oneCell.getC() + 1));
                 // check if one is open
 
-            }
         } else {
-
-            if (!knowledgeBase.getHiddenCells().contains(new Cell(oneCell.getR() - 1, oneCell.getC())) &&
-                    !knowledgeBase.getHiddenCells().contains(new Cell(oneCell.getR() + 1, oneCell.getC())) &&
-                    !knowledgeBase.getHiddenCells().contains(new Cell(twoCell.getR() - 1, twoCell.getC())) &&
-                    !knowledgeBase.getHiddenCells().contains(new Cell(twoCell.getR() + 1, twoCell.getC()))) {
                 // that means the are on the same row, we vary rDiff, and move row by twice cDiff
                 cellsToFlag.add(new Cell(oneCell.getR() + 1, oneCell.getC() + (2 * cDiff)));
                 cellsToFlag.add(new Cell(oneCell.getR() - 1, oneCell.getC() + (2 * cDiff)));
                 // check if one is open
-            }
         }
 
         // make sure that the cells exist in the map
