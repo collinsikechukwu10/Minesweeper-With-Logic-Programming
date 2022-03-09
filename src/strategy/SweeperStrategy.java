@@ -30,8 +30,6 @@ public abstract class SweeperStrategy {
         this.shouldProbeCell = shouldProbeCell;
     }
 
-    public abstract void clean();
-
     public abstract List<Cell> getInitMove();
 
 }

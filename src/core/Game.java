@@ -69,6 +69,10 @@ public class Game {
         return count;
     }
 
+    public int noOfProbableCells(){
+        return (gameBoardHeight*gameBoardWidth) - getBlockedCells().size();
+    }
+
 
     public BoardCellType probe(Cell cell) {
         BoardCellType cellType = BoardCellType.resolve(map[cell.getR()][cell.getC()]);

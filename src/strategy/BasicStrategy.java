@@ -14,10 +14,6 @@ public class BasicStrategy extends SweeperStrategy {
     }
 
     @Override
-    public void clean() {
-    }
-
-    @Override
     public List<Cell> getInitMove() {
         return List.of(new Cell(0,0));
     }

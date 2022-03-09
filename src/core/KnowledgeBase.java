@@ -58,15 +58,6 @@ public class KnowledgeBase {
 
     }
 
-    public void resetKnowledgeBase() {
-        hiddenCells.addAll(uncoveredCells);
-        uncoveredCells.clear();
-
-        hiddenCells.addAll(flaggedCells);
-        flaggedCells.clear();
-    }
-
-
     public BoardCellType getKnowledgeBaseCellTypeAt(Cell cell) {
         return BoardCellType.resolve(mapView[cell.getR()][cell.getC()]);
     }
@@ -99,7 +90,7 @@ public class KnowledgeBase {
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
                 Cell neighbour = new Cell(r + i, c + j);
-                if (neighbour != cell && isOnBoard(neighbour)) {
+                if (!neighbour.equals(cell) && isOnBoard(neighbour)) {
                     neighbours.add(neighbour);
                 }
             }
@@ -123,8 +114,9 @@ public class KnowledgeBase {
         return flaggedCells;
     }
 
-    boolean isOnBoard(Cell cell) {
+    public boolean isOnBoard(Cell cell) {
         return cell.getR() >= 0 && cell.getR() < mapView.length && cell.getC() >= 0 && cell.getC() < mapView[0].length;
     }
+
 
 }

@@ -147,6 +147,10 @@ public class Agent {
         System.out.println();
     }
 
+    public float getPercentageHiddenCells() {
+        return (float) knowledgeBase.getHiddenCells().size() / (float) game.noOfProbableCells();
+    }
+
     private void logKnowledgeBaseView() {
         printBoard(knowledgeBase.getMapView());
     }

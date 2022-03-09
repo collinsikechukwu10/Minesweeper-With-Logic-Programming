@@ -61,10 +61,10 @@ public class A2main {
 //                //TODO: Part 4
                 strategy = new CnfSatisfiabilityTestReasoningStrategy();
                 break;
-//            case "P5":
+            case "P5":
 //                //TODO: Part 5
-//                strategy = new BasicStrategy();
-//                break;
+                strategy = new CommonArrangementStrategy();
+                break;
         }
         return strategy;
     }

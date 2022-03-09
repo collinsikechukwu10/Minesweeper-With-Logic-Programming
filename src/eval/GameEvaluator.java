@@ -1,11 +1,7 @@
 package eval;
 
 import core.*;
-import strategy.BasicStrategy;
-import strategy.SweeperStrategy;
-import strategy.CnfSatisfiabilityTestReasoningStrategy;
-import strategy.SinglePointStrategy;
-import strategy.DnfSatisfiabilityTestReasoningStrategy;
+import strategy.*;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -29,11 +25,13 @@ public class GameEvaluator {
         private final GameStatus status;
         private final World world;
         private final SweeperStrategy strategy;
+        private final float percentageHiddenCells;
 
-        Result(SweeperStrategy strategy, World world, GameStatus status) {
+        Result(SweeperStrategy strategy, World world, GameStatus status, float percentageHiddenCells) {
             this.status = status;
             this.world = world;
             this.strategy = strategy;
+            this.percentageHiddenCells = percentageHiddenCells;
         }
 
         String toCSVLine() {
@@ -41,12 +39,15 @@ public class GameEvaluator {
             csvLine.add(world.name());
             csvLine.add(world.shape());
             csvLine.add(strategy.getClass().getSimpleName());
-            csvLine.add(status.getMessage());
+            csvLine.add(String.valueOf(percentageHiddenCells));
+            csvLine.add(status.getMessage().replace("\n", ""));
             return String.join(",", csvLine);
         }
 
-        static String generateReport(List<Result> resultList){
-            return resultList.stream().map(Result::toCSVLine).collect(Collectors.joining("\n"));
+        static String generateReport(List<Result> resultList) {
+            String report = "world,world size,strategy,percentageHiddenCells,result\n";
+            report += resultList.stream().map(Result::toCSVLine).collect(Collectors.joining("\n"));
+            return report;
         }
     }
 
@@ -54,7 +55,8 @@ public class GameEvaluator {
             new BasicStrategy(),
             new CnfSatisfiabilityTestReasoningStrategy(),
             new SinglePointStrategy(),
-            new DnfSatisfiabilityTestReasoningStrategy());
+            new DnfSatisfiabilityTestReasoningStrategy(),//);
+            new CommonArrangementStrategy());
 
 
     /**
@@ -92,6 +94,7 @@ public class GameEvaluator {
         agent.setStrategy(strategy);
         agent.setGame(game);
         agent.traverse();
-        return new Result(strategy, world, game.getStatus());
+        System.out.println("Agent traversing "+ world.name() + "using " + strategy.getClass().getSimpleName());
+        return new Result(strategy, world, game.getStatus(), agent.getPercentageHiddenCells());
     }
 }

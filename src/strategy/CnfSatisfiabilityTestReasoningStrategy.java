@@ -10,15 +10,26 @@ import org.sat4j.specs.IProblem;
 import org.sat4j.specs.ISolver;
 import org.sat4j.specs.TimeoutException;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-public class CnfSatisfiabilityTestReasoningStrategy extends DnfSatisfiabilityTestReasoningStrategy {
+public class CnfSatisfiabilityTestReasoningStrategy extends SinglePointStrategy {
     private final int MAXVAR = 1000000;
 
     @Override
+    public List<Cell> getNextProbe() {
+        // get next probe
+        Iterator<Cell> cellIterator = knowledgeBase.getHiddenCellIterator();
+        while (cellIterator.hasNext()) {
+            Cell cell = solve(cellIterator.next());
+            if (cell != null) {
+                return List.of(cell);
+            }
+        }
+        // dnf could not resolve any cell. fallback try sps
+        return super.getNextProbe();
+    }
+
+
     public Cell solve(Cell cell){
         Set<String> kbu = fillKBU();
         // add current cell
@@ -33,7 +44,7 @@ public class CnfSatisfiabilityTestReasoningStrategy extends DnfSatisfiabilityTes
             try {
                 solver.addClause(new VecInt(dimacsClause));
             } catch (ContradictionException e) {
-                e.printStackTrace();
+//                e.printStackTrace();
             }
         }
         IProblem problem = solver;
